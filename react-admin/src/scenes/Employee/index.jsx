@@ -172,7 +172,7 @@ const EmlpoyeeList = () => {
               color: "black",
             }}
           >
-            <h1 style={{ color: "white" }}>Create Emlpoyee</h1>
+            <h1 style={{ color: "white" }}>Add Employee</h1>
 
             <Formik
               onSubmit={handleFormSubmit}
