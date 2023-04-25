@@ -15,14 +15,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import axios from "axios";
+import  axios  from "axios";
+
 
 const Topbar = (props) => {
-  const [user_name, setCurrentUserName] = useState(sessionStorage.getItem("act_usr_name"));
-  
+
+  const [user_name, setCurrentUserName] = useState();
   const [password, setCurrentPassword] = useState();
-  const [retype_password, setRetypePassword] = useState();
-  
 
   const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
@@ -46,6 +45,8 @@ const Topbar = (props) => {
   const handlePasswordChange = () => {
     setOpenDialog(true);
   };
+
+  
 
   const handlePasswordChangeCloseDialog = async (event) => {
     event.preventDefault();
@@ -80,22 +81,22 @@ const Topbar = (props) => {
               autoFocus
               margin="dense"
               id="name"
-              label="পাসওয়ার্ড"
+              label="নাম"
               fullWidth
               variant="standard"
-              onChange={(e) => setCurrentPassword(e.target.value)}
-              value={password}
+              onChange={(e) => setCurrentUserName(e.target.value)}
+              value={user_name}
             />
 
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="রিটাইপ পাসওয়ার্ড"
+              label="পাসওয়ার্ড"
               fullWidth
               variant="standard"
-              onChange={(e) => setRetypePassword(e.target.value)}
-              value={retype_password}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              value={password}
             />
           </DialogContent>
           <DialogActions>
