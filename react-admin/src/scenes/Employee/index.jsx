@@ -93,12 +93,12 @@ const EmlpoyeeList = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box mx="60px">
       <Header
         title="কর্মকর্তা/কর্মচারী "
         subtitle="কর্মকর্তা/কর্মচারীর তালিকা"
       />
-      <Box m="40px 0 0 0" height="75vh">
+      <Box mx="60" my={5} height="500px">
         <ModalForm onShowDataAfterAdd={handleShowEmployee} />
 
         <DataGrid

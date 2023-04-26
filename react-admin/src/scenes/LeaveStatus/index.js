@@ -25,6 +25,8 @@ const rows = [
 
 
 export default function LeaveStatus() {
+    const dayjs = require('dayjs');
+    const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const usr_id = sessionStorage.getItem('act_usr_id');
     const emp_leave_history = useFetch('http://localhost:5000/employee/'+usr_id);
     // console.log(emp_leave_history);
@@ -57,8 +59,8 @@ export default function LeaveStatus() {
                                     <TableCell component="th" scope="row">
                                         {row.leave_type}
                                     </TableCell>
-                                    <TableCell align="left">{row.leave_start}</TableCell>
-                                    <TableCell align="left">{row.leave_end}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_start).format("DD-MM-YYYY"))}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_end).format("DD-MM-YYYY"))}</TableCell>
                                     <TableCell align="left" sx={{color:"#6E9F65"}}>{row.leave_status}</TableCell>
                                 </TableRow>
                                 :
@@ -71,8 +73,8 @@ export default function LeaveStatus() {
                                     <TableCell component="th" scope="row">
                                         {row.leave_type}
                                     </TableCell>
-                                    <TableCell align="left">{row.leave_start}</TableCell>
-                                    <TableCell align="left">{row.leave_end}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_start).format("DD-MM-YYYY"))}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_end).format("DD-MM-YYYY"))}</TableCell>
                                     <TableCell align="left" sx={{color:"red"}}>{row.leave_status}</TableCell>
                                 </TableRow>
                                 :
@@ -85,8 +87,8 @@ export default function LeaveStatus() {
                                     <TableCell component="th" scope="row">
                                         {row.leave_type}
                                     </TableCell>
-                                    <TableCell align="left">{row.leave_start}</TableCell>
-                                    <TableCell align="left">{row.leave_end}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_start).format("DD-MM-YYYY"))}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_end).format("DD-MM-YYYY"))}</TableCell>
                                     <TableCell align="left" sx={{color:"#FBBC04"}}>{row.leave_status}</TableCell>
                                 </TableRow>
                                 :
@@ -97,8 +99,8 @@ export default function LeaveStatus() {
                                     <TableCell component="th" scope="row">
                                         {row.leave_type}
                                     </TableCell>
-                                    <TableCell align="left">{row.leave_start}</TableCell>
-                                    <TableCell align="left">{row.leave_end}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_start).format("DD-MM-YYYY"))}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_end).format("DD-MM-YYYY"))}</TableCell>
                                     <TableCell align="left" sx={{color:"black"}}>{row.leave_status}</TableCell>
                                 </TableRow>
                             ))}

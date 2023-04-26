@@ -12,11 +12,12 @@ export default function index() {
                 <Header
                     title="উপস্থিতির স্ট্যাটাস"
                 />
-                <Box mb={2}>
+                <Box mb={2} mx={18}>
                     <div>
                     <span><CircleIcon sx={{color:"#34A853", ml:3}}/>সঠিক সময়ব্যাপী উপস্থিত</span>
                     <span><CircleIcon sx={{color:"#FBBC04", ml:3}}/>দেরিতে উপস্থিত/দ্রুত অফিস ত্যাগ</span>
                     <span><CircleIcon sx={{color:"#e98847", ml:3}}/>ছুটি</span>
+                    <span><CircleIcon sx={{color:"#d82a2a", ml:3}}/>অনুপস্থিত</span>
                     </div>
                 </Box>
                 <MyCalendar/>

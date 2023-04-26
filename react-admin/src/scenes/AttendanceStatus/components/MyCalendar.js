@@ -34,7 +34,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         padding: theme.spacing(1),
     },
     '& .MuiPaper-root': {
-        width: "600px"
+        width: "700px"
     }
 }));
 
@@ -105,7 +105,7 @@ const usr_id = sessionStorage.getItem('act_usr_id');
 // console.log(usr_id);
 export default function MyCalendar() {
     const dayjs = require('dayjs');
-    const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d])
+    const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const [value, onChange] = useState(new Date());
     const chunks = useFetch("http://localhost:5000/daily_attendance");
     const emp_leave_history = useFetch('http://localhost:5000/employee/'+usr_id);
@@ -185,6 +185,9 @@ export default function MyCalendar() {
                     else if (filtered?.find(x => x.date === moment(date).format("MM/DD/YYYY") && x?.late_status == 1)) {
                         return 'late';
                     }
+                    else if (filtered?.find(x => x.date === moment(date).format("MM/DD/YYYY") && x?.late_status == 2)) {
+                        return 'absent';
+                    }
                     if(leaveDates?.find(x=> x.find(y => y === moment(date).format("MM/DD/YYYY")))){
                         return 'leave';
                     }
@@ -223,6 +226,7 @@ export default function MyCalendar() {
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
+            <ToastContainer/>
         </div>
     );
 }

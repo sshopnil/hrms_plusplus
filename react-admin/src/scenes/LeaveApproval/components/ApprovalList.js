@@ -43,7 +43,8 @@ const rejBtn =
 export default function ApprovalList(props) {
 
     
-    
+    const dayjs = require('dayjs');
+    const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const nRow = props.leave_history?.map((item) => createData(item.leave_id, item.employee_name, item.leave_type_name, item.leave_start_date, item.leave_end_date));
     // console.log(nRow);
     // console.log(props.leave_history);
@@ -131,8 +132,8 @@ export default function ApprovalList(props) {
                                 </TableCell>
                                 <TableCell align="left">{row.leave_applicant}</TableCell>
                                 <TableCell align="left">{row.leave_type}</TableCell>
-                                <TableCell align="left">{row.leave_start}</TableCell>
-                                <TableCell align="left">{row.leave_end}</TableCell>
+                                <TableCell align="left">{toBn(dayjs(row.leave_start).format("DD-MM-YYYY"))}</TableCell>
+                                <TableCell align="left">{toBn(dayjs(row.leave_end).format("DD-MM-YYYY"))}</TableCell>
                                 <TableCell align="center">
                                     <Button size="small" sx={appBtn} onClick={(event) => handleClick(event, row.leave_id)}>অনুমোদন</Button>
                                     <Button size="small" sx={rejBtn} onClick={(event) => handleClickReject(event, row.leave_id)}>প্রত্যাখ্যান</Button>

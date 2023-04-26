@@ -20,8 +20,8 @@ import useFetch from './scenes/organogram/useFetch';
 import axios from 'axios';
 import AttendanceStatus from './scenes/AttendanceStatus';
 import AttendanceLateApproval from './scenes/AttendanceLateApproval';
-
-
+import EmployeeOrganogram from './scenes/EmployeeOrganogram';
+import LoginPage from './LoginPage';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -84,6 +84,7 @@ export default function EmployeeSystem() {
           </Dialog>
           )}
           <Routes>
+            <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/LeaveApply" element={<LeaveApply />} />
             <Route path="/LeaveRecord" element={<LeaveRecord />} />
@@ -91,9 +92,7 @@ export default function EmployeeSystem() {
             <Route path="/LeaveApproval" element={<LeaveApproval postData = {chunks}/>} />
             <Route path="/AttendanceStatus" element={<AttendanceStatus />} />
             <Route path="/AttendanceLateApproval" element={<AttendanceLateApproval postData = {chunks}/>} />
-            {/* <Route path="/organogram" element={<Organogram />} /> */}
-            {/* <Route path="/Employee" element={<EmlpoyeeList />} /> */}
-            
+            <Route path="/EmployeeOrganogram" element={<EmployeeOrganogram/>} />
           </Routes>
         </main>
       </div>

@@ -16,6 +16,7 @@ import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 import RemoveDoneSharpIcon from '@mui/icons-material/RemoveDoneSharp';
 import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
 import RuleFolderIcon from '@mui/icons-material/RuleFolder';
+import MediationOutlinedIcon from "@mui/icons-material/MediationOutlined";
 
 
 
@@ -116,9 +117,9 @@ const Sidebar = () => {
               sx={{ height: 240, flexGrow: 1, maxWidth: 300}}
             >
               <Item
-                title="ড্যাশবোর্ড"
-                to="/dashboard"
-                icon={<HomeOutlinedIcon />}
+                title="অরগানোগ্রাম"
+                to="/EmployeeOrganogram"
+                icon={<MediationOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />

@@ -123,6 +123,8 @@ export default function AssignEmployeeBtn(props) {
   let parentPos = JSON.parse(window.localStorage.getItem('parent_pos'));
   let parentDep = JSON.parse(window.localStorage.getItem('parent_dept'));
 
+  const parentDepName = departments.find((item)=> item.id == parentDep);
+  // console.log(parentDepName);
   const [openAddEmp, setOpenAddEmp] = React.useState(false);
   const handleAddEmpOpen = () => {
 
@@ -133,6 +135,7 @@ export default function AssignEmployeeBtn(props) {
     setOpenAddEmp(false);
   };
 
+  ///=========================adding employee=============================================
   const handleAddEmpAdd = () =>
   {
     const empl_id = sessionStorage.getItem('sel_empl');
@@ -149,12 +152,18 @@ export default function AssignEmployeeBtn(props) {
     axios.put('http://localhost:5000/office_post/'+empl_id, obj)
       .then(function (response) {
         console.log(response);
+        props.handleAddEmployee(obj);
+        props.handleDialog();
       })
       .catch(function (error) {
         console.log(error);
       }); 
     // window.location.reload();
   }
+  ///=========================adding employee=============================================
+
+
+  ///=========================adding post=============================================
 
 
   const formik = useFormik(
@@ -173,18 +182,21 @@ export default function AssignEmployeeBtn(props) {
         axios.post('http://localhost:5000/office_post', obj)
           .then(function (response) {
             console.log(response);
+            props.handleAddPosition(obj);
+            props.handleDialog();     
           })
           .catch(function (error) {
             console.log(error);
           });
-        console.log(window.localStorage.getItem('user'));
-        window.location.reload();
+        // console.log(window.localStorage.getItem('user'));
+        
         // window.alert("Added successfully!");
         // window.localStorage.clear();
+        window.location.reload();
       }
     }
   );
-
+  ///=========================adding post=============================================
 
   return (
     <Box
@@ -212,16 +224,6 @@ export default function AssignEmployeeBtn(props) {
           }
           onClick={handleClickOpen}
         >পদ তৈরি</Button>
-        {/* <Button key="two"
-          sx={
-            {
-              padding: "5px",
-              fontSize: "18px",
-              borderRadius: "20px",
-              background: "#25316D",
-              color:"white",
-            }
-          }>পদ অপসরণ</Button> */}
         <Button key="three"
           sx={
             {
@@ -234,6 +236,18 @@ export default function AssignEmployeeBtn(props) {
           }
           onClick={handleAddEmpOpen}
         >কর্মকর্তা/কর্মচারি নিয়োগ</Button>
+        {/* <Button key="two"
+          sx={
+            {
+              padding: "5px",
+              fontSize: "18px",
+              borderRadius: "20px",
+              background: "#25316D",
+              color:"white",
+            }
+          }
+          onClick={handleRemovePost}
+          >পদ অপসরণ</Button> */}
       </ButtonGroup>
 
 
@@ -251,11 +265,14 @@ export default function AssignEmployeeBtn(props) {
           },
         }}
       >
+        <DialogTitle sx={{backgroundColor: "#99C4C8"}}>
+          "{parentDepName?.name}"-পদের অধীনে পদ তৈরি
+        </DialogTitle>
         <DialogContent>
-          <Box sx={{ minWidth: 120 }}>
+          <Box sx={{ minWidth: 120,py:2 }}>
             <form onSubmit={formik.handleSubmit}>
 
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={{mb:2}}>
 
                 <TextField id="outlined-basic" label="পদের নাম" variant="outlined" value={formik.values.পদের_নাম} onChange={formik.handleChange} name="পদের_নাম" />
 

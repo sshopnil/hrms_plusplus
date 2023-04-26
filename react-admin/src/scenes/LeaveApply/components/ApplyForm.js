@@ -42,6 +42,17 @@ function reverseString(str) {
 
 
 export default function ApplyForm() {
+    const [file_, setFile] = React.useState("");
+    
+    const handleSet =(e)=>
+    {
+        e.preventDefault();
+        const formData = new FormData();
+
+		formData.append('File', e.target.files[0]);
+        console.log(formData);
+    }
+
     const leave_types = useFetch('http://localhost:5000/leave_type');
     // console.log(leave_types);
     const usr_name = sessionStorage.getItem('act_usr_name');
@@ -133,6 +144,9 @@ export default function ApplyForm() {
                         >
                             {leave_types.map((info) => <MenuItem value={info.id}>{info.name}</MenuItem>)}
                         </Select>
+                    </FormControl>
+                    <FormControl>
+                    <input type='file' onChange={(event)=>handleSet(event)} id="myfile" name="myfile"/>
                     </FormControl>
                     <Box sx={{ my: 10 }}>
                         <Button size="small" sx={appBtn} type='submit' name='submit'>আবেদন</Button>

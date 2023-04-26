@@ -26,7 +26,7 @@ import FormLabel from '@mui/material/FormLabel'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
+import Textarea from '@mui/joy/Textarea/Textarea';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -91,6 +91,7 @@ const usr_id = sessionStorage.getItem('act_usr_id');
 console.log(usr_id);
 
 export default function ApprovalTable(props) {
+    const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const [open, setOpen] = React.useState(false);
     const useLeaveInf = useFetch('http://localhost:5000/daily_attendance');
 
@@ -239,12 +240,7 @@ export default function ApprovalTable(props) {
                     </LocalizationProvider>
                     
                     <FormLabel sx={{my:5}}>দেরির কারণ/দ্রুত অফিস ত্যাগের কারণ</FormLabel>
-                    <input
-                    type="text"
-                    value={lateCause}
-                    readOnly
-                    style={{display:"block"}}
-                    />
+                    <Textarea minRows={3} value={lateCause} readOnly style={{display:"block"}}/>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose}>

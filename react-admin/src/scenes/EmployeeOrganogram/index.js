@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'reactflow/dist/base.css';
 import './index.css';
 import DefaultScreen from './DefaultScreen';
@@ -52,7 +52,7 @@ const makeFedge=(nodes)=>
     source: nodes.id.toString(),
     target: nodes.parent_id.toString(),
     type: 'smoothstep',
-    style: { stroke: '#ff0072' }
+    style: { stroke: '#CA4E79' }
   }
   return edge;
 }
@@ -66,7 +66,7 @@ const makeEdges=(nodes)=>
     source: nodes.parent_id.toString(),
     target: nodes.id.toString(),
     type: 'smoothstep',
-    style: { stroke: '#ff0072' }
+    style: { stroke: '#CA4E79' }
   }
   return edge;
 }
@@ -80,15 +80,18 @@ const Organogram = () => {
   const initNodes = chuncks?.map((items)=>(items.parent_id == -1)?makeFnode(items): makeNodes(items));
 
   const initEdges = chuncks?.map((items)=>(items.parent_id == -1)?makeFedge(items): makeEdges(items));
-  let departments = useFetch("http://localhost:5000/department");
-
 //   window.localStorage.setItem('nodes', JSON.stringify(initNodes));
 //   window.localStorage.setItem('edges', JSON.stringify(initEdges));
   // console.log(initNodes);
 
 // window.localStorage.clear();
   // console.log(window.localStorage.length);
-  
+  const [office_posts, setPosts] = useState(chuncks);
+
+    React.useEffect(() => {
+        setPosts(chuncks);
+    }, [chuncks]);
+
   if(initNodes.length === 0)
   {
     return <DefaultScreen open={open} setOpen = {setOpen}/>
@@ -98,7 +101,7 @@ const Organogram = () => {
   {
     return (
       // <OrganogramScene/>
-      <AsholOrganogram nodes={initNodes} edges={initEdges} departments={departments} chuncks={chuncks}/>
+      <AsholOrganogram nodes={initNodes} edges={initEdges} office_posts={office_posts}/>
     );
 
   }

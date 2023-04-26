@@ -39,6 +39,7 @@ const Topbar = (props) => {
     handleClose();
     // sessionStorage.clear();
     window.location.reload();
+    
     sessionStorage.setItem("active_user", "none");
   };
 
@@ -173,7 +174,7 @@ const Topbar = (props) => {
           পাসওয়ার্ড পরিবর্তন করুন
         </MenuItem>
 
-        <MenuItem onClick={logOutHandle}>
+        <MenuItem onClick={logOutHandle} activeClassName="is-active" to="/">
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

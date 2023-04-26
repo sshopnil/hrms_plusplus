@@ -29,7 +29,8 @@ const sxButton =
 }
 
 export default function RecordForm() {
-
+    const dayjs = require('dayjs');
+    const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const usr_id = sessionStorage.getItem('act_usr_id');
     const emp_leave_history = useFetch('http://localhost:5000/employee/'+usr_id);
     // console.log(emp_leave_history.leaves);
@@ -86,8 +87,8 @@ export default function RecordForm() {
                                     <TableCell component="th" scope="row">
                                         {row.leave_type}
                                     </TableCell>
-                                    <TableCell align="left">{row.leave_start}</TableCell>
-                                    <TableCell align="left">{row.leave_end}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_start).format("DD-MM-YYYY"))}</TableCell>
+                                    <TableCell align="left">{toBn(dayjs(row.leave_end).format("DD-MM-YYYY"))}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
