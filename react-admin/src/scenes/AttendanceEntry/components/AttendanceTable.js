@@ -24,12 +24,6 @@ function createData(empl_id, empl_name) {
     return { empl_id, empl_name };
 }
 
-const rows = [
-    createData(1, "dsadad", "dasdad", "dasd", "dsad"),
-    createData(2, "dsadad", "dasdad", "dasd", "dsad"),
-    createData(3, "dsadad", "dasdad", "dasd", "dsad"),
-    createData(4, "dsadad", "dasdad", "dasd", "dsad"),
-];
 const appBtn =
 {
     background: "#99C4C8",
@@ -76,6 +70,7 @@ export default function AttendanceTable(props) {
             axios.post('http://localhost:5000/daily_attendance', obj)
                 .then(function (response) {
                     console.log(response);
+                    props.handleAttendance();
                     notify();
                 })
                 .catch(function (error) {
@@ -94,7 +89,7 @@ export default function AttendanceTable(props) {
             axios.post('http://localhost:5000/daily_attendance', obj)
                 .then(function (response) {
                     console.log(response);
-                    // window.alert("successfully applied!");
+                    props.handleAttendance();
                     notify();
                 })
                 .catch(function (error) {
@@ -133,7 +128,16 @@ export default function AttendanceTable(props) {
     return (
         <div>
             <DateSelector handleDate={handleDate} />
-            <TableContainer component={Paper} sx={{ minWidth: 550, m: 5 }}>
+            <TableContainer component={Paper} sx={{ minWidth: 550, m: 5, background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",}}>
                 <Table sx={{ minWidth: 550 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -161,16 +165,37 @@ export default function AttendanceTable(props) {
                                                 disableClock={true}
                                                 showSecond={false}
                                                 disabled={true}
+                                                style={{background: "#f5f5fa",
+                                                boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+                                                borderRadius: "30px",
+                                                border:"0",
+                                                boxSizing:"border-box",
+                                                color: "#2a1f62",
+                                                transition: ".2s",
+                                                whiteSpace: "pre",
+                                                wordBreak: "normal",
+                                                wordSpacing: "normal",}}
                                             />
                                         </LocalizationProvider>
                                     </TableCell>
 
                                     <TableCell align="center">
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                            <TimePicker defaultValue={moment()}
+                                            <TimePicker
+                                                defaultValue={moment()}
                                                 disableClock={true}
                                                 showSecond={false}
                                                 disabled={true}
+                                                style={{background: "#f5f5fa",
+                                                boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+                                                borderRadius: "30px",
+                                                border:"0",
+                                                boxSizing:"border-box",
+                                                color: "#2a1f62",
+                                                transition: ".2s",
+                                                whiteSpace: "pre",
+                                                wordBreak: "normal",
+                                                wordSpacing: "normal",}}
                                             />
                                         </LocalizationProvider>
                                     </TableCell>
@@ -194,6 +219,16 @@ export default function AttendanceTable(props) {
                                                 showSecond={false}
                                                 name={row.empl_id + "-starttime"}
                                                 onChange={time => handleEntryTimePicker(time, row.empl_id)}
+                                                style={{background: "#f5f5fa",
+                                                boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+                                                borderRadius: "30px",
+                                                border:"0",
+                                                boxSizing:"border-box",
+                                                color: "#2a1f62",
+                                                transition: ".2s",
+                                                whiteSpace: "pre",
+                                                wordBreak: "normal",
+                                                wordSpacing: "normal",}}
                                             />
                                         </LocalizationProvider>
                                     </TableCell>
@@ -204,7 +239,18 @@ export default function AttendanceTable(props) {
                                                 disableClock={true}
                                                 showSecond={false}
                                                 name={row.empl_id + "-endtime"}
-                                                onChange={time => handleExitTimePicker(time, row.empl_id)} />
+                                                onChange={time => handleExitTimePicker(time, row.empl_id)} 
+                                                style={{background: "#f5f5fa",
+                                                boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+                                                borderRadius: "30px",
+                                                border:"0",
+                                                boxSizing:"border-box",
+                                                color: "#2a1f62",
+                                                transition: ".2s",
+                                                whiteSpace: "pre",
+                                                wordBreak: "normal",
+                                                wordSpacing: "normal",}}
+                                                />
                                         </LocalizationProvider>
                                     </TableCell>
                                     <TableCell align="center">

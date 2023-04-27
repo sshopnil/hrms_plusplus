@@ -17,7 +17,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Header from "../../components/Header";
 import { Box } from "@mui/material";
 import axios from "axios";
-
+import dayjs from "dayjs";
 // import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -113,24 +113,29 @@ const ModalForm = (props) => {
     });
   };
 
-  
+  // dayjs(toBn(formData.dob)).format("MM/DD/YYYY")
+  const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      axios.post('http://localhost:5000/employee', formData)
-      .then(response => console.log(response))
+      const obj = {
+        "address_perm": formData.address_perm,
+        "dob": dayjs(formData.dob).format("MM/DD/YYYY").toString(),
+        "address_curr": formData.address_curr,
+        "marital_status_id": formData.marital_status_id,
+        "phone": formData.phone,
+        "name": formData.name,
+        "religion_id": formData.religion_id,
+        "user_name": formData.user_name,
+      }
+      axios.post('http://localhost:5000/employee', obj)
+      .then(response => {console.log(response); props.onShowDataAfterAdd();})
       .catch(error => console.error(error));
       setFormData(initialState);
-      props.onShowDataAfterAdd();
+      
+      handleClose();
       // window.location.reload();
     };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(formData);
-  //   e.target.reset();
-  //   setFormData(initialState);
-  // };
 
   const validate = (data) => {
     const errors = {};
@@ -188,8 +193,8 @@ const ModalForm = (props) => {
           sx={{
             bgcolor: "white",
             width: "75%",
-            height: "100%",
-            margin: "auto",
+            height: "50%",
+            margin: "150px auto",
             boxShadow: 3,
             borderRadius: 2,
             display: "block",
@@ -261,7 +266,7 @@ const ModalForm = (props) => {
               <TextField
                 variant="standard"
                 label="Permanent Address"
-                name="ddress_perm"
+                name="address_perm"
                 value={formData.address_perm}
                 onChange={handlePermanentAddressChange}
                 fullWidth

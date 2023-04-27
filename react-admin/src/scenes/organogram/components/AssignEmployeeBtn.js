@@ -182,7 +182,7 @@ export default function AssignEmployeeBtn(props) {
         axios.post('http://localhost:5000/office_post', obj)
           .then(function (response) {
             console.log(response);
-            props.handleAddPosition(obj);
+            props.handleAddPosition();
             props.handleDialog();     
           })
           .catch(function (error) {
@@ -192,7 +192,7 @@ export default function AssignEmployeeBtn(props) {
         
         // window.alert("Added successfully!");
         // window.localStorage.clear();
-        window.location.reload();
+        // window.location.reload();
       }
     }
   );

@@ -20,7 +20,7 @@ export default function DatePickerValue(props) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <FormControl sx={{ m: 1, minWidth: 210, borderBottom: "2px solid #99C4C8" }}>
+            <FormControl sx={{ m: 1, minWidth: 210, borderBottom: "2px solid #99C4C8", background:"#f5f5fa !important"}}>
                 <label htmlFor="att_date">Date</label>
                 <input
                     type="date"

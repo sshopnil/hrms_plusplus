@@ -122,7 +122,7 @@ const componentNode = { custom: (props) => <CustomNode myProp="myProps" {...prop
 
 const AsholOrganogram = (props) => {
 
-  const notifyApproved = () => { toast.success("আবেদনটি অনুমোদিত হয়েছে!", { position: toast.POSITION.BOTTOM_RIGHT }) };
+  const notifyAdd = () => { toast.success("কর্মকর্তা/কর্মচারী নিয়োগ সফল হয়েছে!", { position: toast.POSITION.BOTTOM_RIGHT }) };
 
   const [open, setOpen] = React.useState(false);
 
@@ -148,50 +148,16 @@ const AsholOrganogram = (props) => {
   const [initNode, setInitNode] = React.useState(props.nodes);
   const [initEdge, setInitEdge] = React.useState(props.edges);
   const department_ = props.departments;
-  const chuncks = useFetch("http://localhost:5000/office_post");
+  const office_posts = props.office_posts;
 
-
-  ///=======================================handle add postition=======================================
-  const handleAddPosition = (posObj) => {
-    // console.log(initEdge);
-
-    // console.log(posObj);
-    const parentDepName = department_.find((item) => item.id == posObj.department_id);
-    // const selfID = chuncks?.find((item)=> item.name == posObj.name);
-    let selfID = chuncks?.length + 1;
-    console.log(selfID);
-    const new_node = {
-      id: selfID.toString(),
-      type: 'custom',
-      data: { name: '', job: posObj.name, emoji: '', department: parentDepName.name, dep_id: posObj.department_id },
-      position: {},
-    }
-    let newID = "e-".concat(selfID);
-    const new_edge = {
-      id: newID,
-      source: posObj.parent_id.toString(),
-      target: selfID.toString(),
-      type: 'smoothstep',
-      style: { stroke: '#CA4E79' }
-    }
-    // console.log(new_edge);
-
-    const nArray = [...initNode];
-    nArray.push(new_node);
-    setInitNode(nArray);
-
-    const eArray = [...initEdge];
-    eArray.push(new_edge);
-    setInitEdge(eArray);
-  }
-  ///=======================================handle add postition=======================================
-
-
-  // console.log("added!");
   const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
     initNode,
     initEdge
   );
+
+
+  // console.log("added!");
+  
 
   ///========================================handle add employees========================================
   const handleAddEmployee = (empObj) => {
@@ -199,6 +165,7 @@ const AsholOrganogram = (props) => {
     const temp_node = initNode?.map((item => { if (item.id == selfId) { item.data.name = empObj.name; } return item; }));
 
     setInitNode(temp_node);
+    notifyAdd();
   }
   ///========================================handle add employees========================================
 
@@ -260,7 +227,7 @@ const AsholOrganogram = (props) => {
 
       >
         <DialogContent>
-          <AssignEmployeeBtn handleAddPosition={handleAddPosition} handleDialog={handleClose} handleAddEmployee={handleAddEmployee} />
+          <AssignEmployeeBtn handleAddPosition={props.handleOffice_posts} handleDialog={handleClose} handleAddEmployee={handleAddEmployee} />
         </DialogContent>
       </Dialog>
       <ThemeProvider theme={theme}>
@@ -277,7 +244,18 @@ const AsholOrganogram = (props) => {
           connectionLineType={ConnectionLineType.SmoothStep}
           onNodeClick={captureElementClick ? onNodeClick : undefined}
           fitView
-          style={{ marginLeft: "50px" }}
+          style={{ marginLeft: "50px",
+          background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+        }}
         >
           {/* <Background color='#000'/> */}
           <MiniMapStyled />

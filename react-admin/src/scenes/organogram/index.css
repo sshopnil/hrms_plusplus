@@ -19,3 +19,6 @@
   .layoutflow .controls button:first-child {
     margin-right: 10px;
   }
+  .react-flow{
+    width: 1350px !important;
+  }

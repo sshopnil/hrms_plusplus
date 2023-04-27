@@ -42,16 +42,16 @@ function reverseString(str) {
 
 
 export default function ApplyForm() {
-    const [file_, setFile] = React.useState("");
+    // const [file_, setFile] = React.useState("");
     
-    const handleSet =(e)=>
-    {
-        e.preventDefault();
-        const formData = new FormData();
+    // const handleSet =(e)=>
+    // {
+    //     e.preventDefault();
+    //     const formData = new FormData();
 
-		formData.append('File', e.target.files[0]);
-        console.log(formData);
-    }
+	// 	formData.append('File', e.target.files[0]);
+    //     console.log(formData);
+    // }
 
     const leave_types = useFetch('http://localhost:5000/leave_type');
     // console.log(leave_types);
@@ -98,11 +98,17 @@ export default function ApplyForm() {
     return (
         <div>
             <Box sx={{
-                background: "#F7FBFC",
-                boxShadow: "0px 4px 35px -3px rgba(0, 0, 0, 0.25)",
-                borderRadius: "95px",
-                padding: "50px",
-                height: "100%"
+                background: "#f5f5fa",
+                boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+                borderRadius: "30px",
+                border:"0",
+                boxSizing:"border-box",
+                color: "#2a1f62",
+                transition: ".2s",
+                whiteSpace: "pre",
+                wordBreak: "normal",
+                wordSpacing: "normal",
+                padding:"120px"
             }}>
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl sx={{ m: 1, minWidth: 210, borderBottom: "2px solid #99C4C8" }}>
@@ -146,7 +152,7 @@ export default function ApplyForm() {
                         </Select>
                     </FormControl>
                     <FormControl>
-                    <input type='file' onChange={(event)=>handleSet(event)} id="myfile" name="myfile"/>
+                    {/* <input type='file' onChange={(event)=>handleSet(event)} id="myfile" name="myfile"/> */}
                     </FormControl>
                     <Box sx={{ my: 10 }}>
                         <Button size="small" sx={appBtn} type='submit' name='submit'>আবেদন</Button>

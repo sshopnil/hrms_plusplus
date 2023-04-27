@@ -21,23 +21,22 @@ const LoggedInSidebar = () => {
         "& .pro-sidebar-inner": {
           position: "absolute",
           left: "15px",
-          top: "14px",
-          background: "#F7FBFC",
-          boxShadow: "0px 4px 35px -3px rgba(0, 0, 0, 0.25)",
-          borderRadius: "55px",
+          top: "5px",
+          width:"280px",
+          background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+          height:"fit-content(100em)"
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
-        },
-        "& .pro-inner-item": {
-          backgroundColor: "#F7FBFC",
-          borderRadius: "60px",
-        },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
-        },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
         },
       }}
     >

@@ -316,7 +316,18 @@ const AsholOrganogram = (props) => {
           connectionLineType={ConnectionLineType.SmoothStep}
           onNodeClick={captureElementClick ? onNodeClick : undefined}
           fitView
-          style={{ marginLeft: "50px" }}
+          style={{ marginLeft: "50px",
+          background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+        }}
         >
           {/* <Background color='#000'/> */}
           <MiniMapStyled />

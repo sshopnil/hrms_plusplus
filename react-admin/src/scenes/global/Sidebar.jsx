@@ -50,50 +50,54 @@ const Sidebar = () => {
         "& .pro-sidebar-inner": {
           position: "absolute",
           left: "15px",
-          top: "14px",
-          background: "#F7FBFC",
-          boxShadow: "0px 4px 35px -3px rgba(0, 0, 0, 0.25)",
-          borderRadius: "55px",
-          width:"280px"
+          top: "5px",
+          width:"280px",
+          background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+          height:"fit-content(100em)"
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item": {
-          backgroundColor: "#F7FBFC",
-          borderRadius: "60px",
-          textAlign:"center"
-        },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+        "& .pro-menu-item": {
+          background: "#f5f5fa",
+          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+          border:"0",
+          boxSizing:"border-box",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#FC1555 !important",
+        },
+        "& .pro-inner-item:hover": {
+          background:"rgba(202, 78, 121, 0.20)",
+          color: "#FC1555 !important",
         },
         "& .MuiTreeItem-content":
         {
           padding:"15px",
           textAlign:"center",
-          background: "none",
+          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
           color:"black"
         },
-        "& .MuiTreeItem-content:hover":
+        "& .Mui-expanded":
         {
-          color: "#868dfb !important",
-          background: "transparent",
-
-        },
-        "& .MuiTreeItem-content:active":
-        {
-          color: "#868dfb !important",
-          background: "none",
-
+          transition:"1s",
+          color: "#25316D !important",
+          border: "2px 0 0 0 solid #FC1555",
+          boxShadow:"rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset",
         },
       }}
     >
       <ProSidebar>
         <Menu>
-          <MenuItem>
             {
               <Box
                 sx={{
@@ -107,7 +111,6 @@ const Sidebar = () => {
                 <SVGComponent />
               </Box>
             }
-          </MenuItem>
 
           <Box >
             <TreeView
@@ -116,14 +119,15 @@ const Sidebar = () => {
               defaultExpandIcon={<ChevronRightIcon />}
               sx={{ height: 240, flexGrow: 1, maxWidth: 300}}
             >
+              <TreeItem nodeId="0" label="অরগানোগ্রাম">
               <Item
-                title="অরগানোগ্রাম"
+                title="সামগ্রিক অরগানোগ্রাম"
                 to="/EmployeeOrganogram"
                 icon={<MediationOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
-
+              </TreeItem>
               <TreeItem nodeId="1" label="ছুটি">
               <Item
                 title="ছুটির আবেদন"
@@ -170,80 +174,6 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
               </TreeItem>
-              {/* <Item
-              title="অরগানোগ্রাম"
-              to="/organogram"
-              icon={<MediationOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-              {/* <Item
-              title="কর্মকর্তা/কর্মচারী"
-              to="/Employee"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-              {/* <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
             </TreeView>
           </Box>
         </Menu>

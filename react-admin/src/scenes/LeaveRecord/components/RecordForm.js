@@ -69,7 +69,18 @@ export default function RecordForm() {
             </Box>
             <Box sx={{my:10}}>
             <Header title="নিজের ভোগকৃত ছুটির তালিকা"/>
-            <TableContainer component={Paper} sx={{ minWidth: 450 }}>
+            <TableContainer component={Paper} sx={{ minWidth: 450,
+            background: "#f5f5fa",
+            boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+            borderRadius: "30px",
+            border:"0",
+            boxSizing:"border-box",
+            color: "#2a1f62",
+            transition: ".2s",
+            whiteSpace: "pre",
+            wordBreak: "normal",
+            wordSpacing: "normal",
+            }}>
                     <Table sx={{ minWidth: 450 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>

@@ -109,7 +109,16 @@ export default function ApprovalList(props) {
 
     return (
         <Box mx="60px">
-            <TableContainer component={Paper} sx={{ minWidth: 650 }}>
+            <TableContainer component={Paper} sx={{ minWidth: 650, background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",}}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>

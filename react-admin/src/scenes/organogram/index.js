@@ -4,7 +4,7 @@ import './index.css';
 import DefaultScreen from './DefaultScreen';
 import AsholOrganogram from './AsholOrganogram';
 import useFetch from './useFetch';
-
+import axios from 'axios';
 
 
 const makeNodes = (node) => {
@@ -77,17 +77,28 @@ const makeEdges=(nodes)=>
 const Organogram = () => {
   const [open, setOpen] = React.useState(false);
   const chuncks = useFetch("http://localhost:5000/office_post");
+  const [office_posts, setPosts] = React.useState(chuncks);
+
+  React.useEffect(() => {
+      setPosts(chuncks);
+  }, [chuncks]);
+  
+
+  const handleOffice_posts = () =>
+  {
+    axios
+      .get("http://localhost:5000/office_post")
+      .then((response) => setPosts(response.data))
+      .catch((error) => console.error(error));
+    // console.log("triggered");
+    window.location.reload();
+  }
+
   const initNodes = chuncks?.map((items)=>(items.parent_id == -1)?makeFnode(items): makeNodes(items));
 
   const initEdges = chuncks?.map((items)=>(items.parent_id == -1)?makeFedge(items): makeEdges(items));
   let departments = useFetch("http://localhost:5000/department");
 
-//   window.localStorage.setItem('nodes', JSON.stringify(initNodes));
-//   window.localStorage.setItem('edges', JSON.stringify(initEdges));
-  // console.log(initNodes);
-
-// window.localStorage.clear();
-  // console.log(window.localStorage.length);
   
   if(initNodes.length === 0)
   {
@@ -98,7 +109,7 @@ const Organogram = () => {
   {
     return (
       // <OrganogramScene/>
-      <AsholOrganogram nodes={initNodes} edges={initEdges} departments={departments} chuncks={chuncks}/>
+      <AsholOrganogram nodes={initNodes} edges={initEdges} departments={departments} office_posts={office_posts} handleOffice_posts={handleOffice_posts}/>
     );
 
   }

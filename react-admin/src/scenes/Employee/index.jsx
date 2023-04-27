@@ -3,27 +3,22 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { useState, useEffect, React } from "react";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
-
 import Header from "../../components/Header";
-import { mockDataEmployee } from "../../data/mockData";
 import ModalForm from "./AddEmployee";
 import EditForm from "./EditForm";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const EmlpoyeeList = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
 
   const [employeeData, setEmployeeData] = useState([]);
+  const notifySuccessAddition = () => {toast.success("সংযুক্তি সফল হয়েছে!", {position: toast.POSITION.BOTTOM_RIGHT})};
+  const notifySuccessEdit = () => {toast.success("হালনাগাদ সফল হয়েছে!", {position: toast.POSITION.BOTTOM_RIGHT})};
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:5000/employee', {
-  //     params: {
-  //       fields: ['id','name', 'phone', 'address_curr']
-  //     }
-  //   })
-  //   .then(response => setEmployeeData(response.data))
-  //   .catch(error => console.error(error));
-  // }, []);
 
   useEffect(() => {
     axios.get("http://localhost:5000/employee").then((response) => {
@@ -37,6 +32,7 @@ const EmlpoyeeList = () => {
       .get("http://localhost:5000/employee")
       .then((response) => setEmployeeData(response.data))
       .catch((error) => console.error(error));
+    notifySuccessAddition();
   };
 
   const handleShowAfterEdit = () => {
@@ -45,6 +41,7 @@ const EmlpoyeeList = () => {
       .get("http://localhost:5000/employee")
       .then((response) => setEmployeeData(response.data))
       .catch((error) => console.error(error));
+    notifySuccessEdit();
   };
 
   //Modal for Edit Finctionality
@@ -105,16 +102,29 @@ const EmlpoyeeList = () => {
           rows={employeeData}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
+          sx={{
+            background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+          }}
         />
       </Box>
 
       <Modal open={showModal} onClose={handleCloseModal}>
         <EditForm
           row={selectedRow}
+          handleShowAfterEdit={handleShowAfterEdit}
           onClose={handleCloseModal}
-          onShowDataAfterEdit={handleShowAfterEdit}
         />
       </Modal>
+      <ToastContainer/>
     </Box>
   );
 };

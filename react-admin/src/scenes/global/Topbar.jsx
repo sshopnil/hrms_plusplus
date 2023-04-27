@@ -111,8 +111,18 @@ const Topbar = (props) => {
         display="flex"
         borderRadius="50px"
         marginLeft="auto"
-        background="#F7FBFC"
-        boxShadow="0px 0px 15px -3px rgba(0, 0, 0, 0.25)"
+        sx={{
+          background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+        }}
       >
         <Box sx={{ flex: 1 }} />
         <Box sx={{ m: 2, textTransform: "uppercase" }}>
@@ -142,7 +152,7 @@ const Topbar = (props) => {
           elevation: 0,
           sx: {
             overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            boxShadow:"rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
             mt: 1.5,
             "& .MuiAvatar-root": {
               width: 32,
@@ -158,7 +168,7 @@ const Topbar = (props) => {
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: "background.paper",
+              bgcolor: "#f5f5fa",
               transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },

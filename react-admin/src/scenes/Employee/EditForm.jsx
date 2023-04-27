@@ -17,6 +17,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Header from "../../components/Header";
 import { Box } from "@mui/material";
 import axios from "axios";
+import dayjs from "dayjs";
 
 const initialState = {
   address_perm: "",
@@ -31,20 +32,19 @@ const initialState = {
 
 
 
-const EditForm = ({ row, props,onClose }) => {
+const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
 //   const [name, setName] = useState(props.user_name);
 //   const [phone, setPhone] = useState(props.phone);
 
   
   //const id = row.id;
+  // console.log(row);
+  const  {address_perm,dob,address_curr,marital_status,phone,name,religion,user_name,id} = row;
 
-  const  {address_perm,dob,address_curr,marital_status_id,phone,name,religion_id,user_name,id} = row;
-
-  const  newRow = {address_perm,dob,address_curr,marital_status_id,phone,name,religion_id,user_name};
   
 
   const [religions, setReligions] = useState([]);
-  const [martualStatus, setMaritualStatus] = useState([]);
+  const [maritalStatuss, setMaritualStatus] = useState([]);
 
 
   useEffect(() => {
@@ -59,8 +59,12 @@ const EditForm = ({ row, props,onClose }) => {
     });
   }, []);
 
+  const toEn = n => n.replace(/[ ০ - ৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
+  const dayjs = require('dayjs');
+  const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
   
-
+  const  newRow = {address_perm,dob,address_curr,marital_status,phone,name,religion,user_name};
+  // console.log(newRow);
   const [formData, setFormData] = useState(newRow);
   const [errors, setErrors] = useState({});
 
@@ -109,30 +113,42 @@ const EditForm = ({ row, props,onClose }) => {
   const handleMartualStatusChange = (e) => {
     setFormData({
       ...formData,
-      marital_status_id: e.target.value,
+      marital_status:{
+        id : e.target.value,
+      }
     });
   };
 
   const handleReligionChange = (e) => {
     setFormData({
       ...formData,
-      religion_id: e.target.value,
+      religion:{
+        id: e.target.value,
+      }
     });
   };
 
   
 
     const handleSubmit = (e) => {
-      console.log(row);
-      console.log(formData);
+      // console.log(row);
+      // console.log(formData);
+      const obj = {
+          "religion_id": formData.religion.id,
+          "address_perm": formData.address_perm,
+          "marital_status_id": formData.marital_status.id,
+          "dob": dayjs(formData.dob).format("MM/DD/YYYY").toString(),
+          "address_curr": formData.address_curr,
+          "name": formData.name,
+          "user_name": formData.user_name,
+          "phone": formData.phone,
+      }
       onClose();
       e.preventDefault();
-      axios.put('http://localhost:5000/employee/${row.id}', formData)
-      .then(response => console.log(response))
+      axios.put('http://localhost:5000/employee/'+row.id, obj)
+      .then(response => {console.log(response); handleShowAfterEdit();})
       .catch(error => console.error(error));
       setFormData(initialState);
-
-      //props.onShowDataAfterEdit();
     };
 
   // const handleSubmit = (e) => {
@@ -180,8 +196,8 @@ const EditForm = ({ row, props,onClose }) => {
           sx={{
             bgcolor: "white",
             width: "75%",
-            height:"100%",
-            margin: "auto",
+            height: "50%",
+            margin: "150px auto",
             boxShadow: 3,
             borderRadius: 2,
             display: "block",
@@ -270,7 +286,7 @@ const EditForm = ({ row, props,onClose }) => {
                   labelId="religion-label"
                   id="religion"
                   name="religion_id"
-                  value={formData.religion_id}
+                  value={formData.religion.id}
                   onChange={handleReligionChange}
                   fullWidth
                   required
@@ -291,12 +307,12 @@ const EditForm = ({ row, props,onClose }) => {
                   labelId="religion-label"
                   id="religion"
                   name="marital_status_id"
-                  value={formData.marital_status_id}
+                  value={formData.marital_status.id}
                   onChange={handleMartualStatusChange}
                   fullWidth
                   required
                 >
-                  {martualStatus.map((marital) => (
+                  {maritalStatuss.map((marital) => (
                     <MenuItem key={marital.id} value={marital.id}>
                       {marital.name}
                     </MenuItem>
@@ -310,7 +326,7 @@ const EditForm = ({ row, props,onClose }) => {
                   type="date"
                   id="dob"
                   name="dob"
-                  value={formData.dob}
+                  value={dayjs(toEn(formData.dob)).format("YYYY-MM-DD")}
                   onChange={handleDobChange}
                 />
               </FormControl>

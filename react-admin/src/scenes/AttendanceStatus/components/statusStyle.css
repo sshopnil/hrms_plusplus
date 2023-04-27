@@ -33,14 +33,21 @@
     width: 1000px;
     padding: 5px;
     max-width: 100%;
-    color: rgb(41, 38, 38);
-    background: #FFFFFF;
-    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.13);
     border-radius: 23px;
     border-color: white;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.12em;
     font-size: 20px;
+    background: #f5f5fa;
+    box-shadow: -10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17;
+    border-radius: 30px;
+    border: 0;
+    box-sizing:border-box;
+    color: #2a1f62;
+          transition: .5s;
+          white-space: pre;
+          word-break: normal;
+          word-spacing: normal;
    }
    .react-calendar__navigation button {
     color: #645c03;
