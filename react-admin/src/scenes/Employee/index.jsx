@@ -74,7 +74,7 @@ const EmlpoyeeList = () => {
     },
     {
       field: "Action",
-      headerName: "Action",
+      headerName: "ক্রিয়া",
       flex: 1,
       disableClickEventBubbling: true,
       renderCell: (params) => (
@@ -83,7 +83,7 @@ const EmlpoyeeList = () => {
           color="primary"
           onClick={() => handleEditClick(params.row)}
         >
-          Edit
+          হালনাগাদ
         </Button>
       ),
     },

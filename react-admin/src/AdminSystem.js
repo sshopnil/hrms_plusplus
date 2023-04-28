@@ -8,6 +8,7 @@ import EmlpoyeeList from './scenes/Employee';
 import Admin_Sidebar from './scenes/global/Admin_Sidebar';
 import AttendanceEntry from './scenes/AttendanceEntry';
 import AttendanceTime from './scenes/AttendanceTime';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -24,7 +25,7 @@ const style = {
 window.localStorage.setItem('upAtt', JSON.stringify(0));
 // window.localStorage.clear();
 export default function EmployeeSystem() {
-
+  
   return (
     <div className="app">
         <Admin_Sidebar />
@@ -35,8 +36,6 @@ export default function EmployeeSystem() {
             <Route path="/organogram" element={<Organogram />} />
             <Route path="/Employee" element={<EmlpoyeeList />} />
             <Route path="/AttendanceEntry" element={<AttendanceEntry />} />
-            {/* <Route path="/organogram" element={<Organogram />} /> */}
-            {/* <Route path="/Employee" element={<EmlpoyeeList />} /> */}
             
           </Routes>
         </main>

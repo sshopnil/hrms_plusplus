@@ -49,11 +49,11 @@ const Sidebar = () => {
       sx={{
         "& .pro-sidebar-inner": {
           position: "absolute",
-          left: "15px",
+          left:"10px",
           top: "5px",
           width:"280px",
           background: "#f5f5fa",
-          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 1px 30px 0 #1d0dca17",
           borderRadius: "30px",
           border:"0",
           boxSizing:"border-box",
@@ -69,9 +69,7 @@ const Sidebar = () => {
         },
         "& .pro-menu-item": {
           background: "#f5f5fa",
-          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-          border:"0",
-          boxSizing:"border-box",
+          boxShadow:"rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
         },
         "& .pro-menu-item.active": {
           color: "#FC1555 !important",
@@ -85,7 +83,7 @@ const Sidebar = () => {
           padding:"15px",
           textAlign:"center",
           boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-          color:"black"
+          color:"black",
         },
         "& .Mui-expanded":
         {
@@ -112,7 +110,7 @@ const Sidebar = () => {
               </Box>
             }
 
-          <Box >
+          <Box sx={{borderRadius:"20px"}}>
             <TreeView
               aria-label="file system navigator"
               defaultCollapseIcon={<ExpandMoreIcon />}

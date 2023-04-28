@@ -280,7 +280,7 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
 
               <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-controlled-open-select-label">
-                  Religion
+                  ধর্ম
                 </InputLabel>
                 <Select
                   labelId="religion-label"
@@ -301,7 +301,7 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
 
               <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-controlled-open-select-label">
-                  Marital Status
+                  বৈবাহিক অবস্থা
                 </InputLabel>
                 <Select
                   labelId="religion-label"

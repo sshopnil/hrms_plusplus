@@ -16,6 +16,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import  axios  from "axios";
+// import { useNavigate } from 'react-router-dom';
+
 
 
 const Topbar = (props) => {
@@ -38,6 +40,7 @@ const Topbar = (props) => {
   const logOutHandle = () => {
     handleClose();
     // sessionStorage.clear();
+    navigate('/', { replace: true });
     window.location.reload();
     
     sessionStorage.setItem("active_user", "none");

@@ -52,6 +52,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogActions-root': {
     padding: theme.spacing(1),
   },
+  '& .MuiPaper-root': {
+    minWidth: "1000px"
+}
 }));
 
 function BootstrapDialogTitle(props) {
@@ -211,15 +214,23 @@ export default function AssignEmployeeBtn(props) {
       <ButtonGroup
         orientation="vertical"
         aria-label="vertical outlined button group"
+        sx={{minWidth:"550px", background:"transparent !important"}}
       >
         <Button key="one"
           sx={
             {
-              padding: "5px",
-              fontSize: "18px",
-              borderRadius: "20px",
-              background: "#25316D",
-              color:"white",
+              background: "#f5f5fa",
+          boxShadow: "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+          padding:"20px",
+          fontSize:"20px",
             }
           }
           onClick={handleClickOpen}
@@ -227,11 +238,19 @@ export default function AssignEmployeeBtn(props) {
         <Button key="three"
           sx={
             {
-              padding: "5px",
-              fontSize: "18px",
-              borderRadius: "20px",
-              background: "#25316D",
-              color:"white",
+              background: "#f5f5fa",
+          boxShadow: "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+          padding:"20px",
+          fontSize:"20px",
+
             }
           }
           onClick={handleAddEmpOpen}
@@ -260,12 +279,12 @@ export default function AssignEmployeeBtn(props) {
         PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
         sx={{
-          '& .MuiDialogContent-root': {
-            backgroundColor: "#99C4C8",
-          },
+          "& .MuiPaper-root":{
+            minWidth:"700px"
+          }
         }}
       >
-        <DialogTitle sx={{backgroundColor: "#99C4C8"}}>
+        <DialogTitle>
           "{parentDepName?.name}"-পদের অধীনে পদ তৈরি
         </DialogTitle>
         <DialogContent>
@@ -324,6 +343,18 @@ export default function AssignEmployeeBtn(props) {
                 slots={{ toolbar: GridToolbar }}
                 onRowSelectionModelChange={(itm) => sessionStorage.setItem('sel_empl', itm.at(0))}
                 // onRowClick={handleRowCLick}
+                sx={{
+                  background: "#f5f5fa",
+          boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
+          borderRadius: "30px",
+          border:"0",
+          boxSizing:"border-box",
+          color: "#2a1f62",
+          transition: ".2s",
+          whiteSpace: "pre",
+          wordBreak: "normal",
+          wordSpacing: "normal",
+                }}
               />
             </div>
           </Typography>

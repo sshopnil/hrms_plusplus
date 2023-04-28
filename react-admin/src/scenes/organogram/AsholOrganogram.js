@@ -220,9 +220,8 @@ const AsholOrganogram = (props) => {
         PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
         sx={{
-          '& .MuiDialogContent-root': {
-            backgroundColor: "#99C4C8",
-          },
+          backgroundColor: "transparent !important",
+            borderRadius:"20px",
         }}
 
       >

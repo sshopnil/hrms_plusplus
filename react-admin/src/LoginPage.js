@@ -27,7 +27,6 @@ import axios from 'axios';
 
 
 
-
 export default function LoginPage() {
   const usr_list = useFetch('http://localhost:5000/employee');
   const [username, setUsername] = useState("");
@@ -48,9 +47,12 @@ export default function LoginPage() {
     // console.log(username, password);
     if(username == "admin" && password == "1234")
     {
+      
+
       sessionStorage.setItem('act_usr_name', username);
       sessionStorage.setItem('active_user', 'admin');
       window.location.reload(); 
+
     }
     else{
       let verifyObj = "";
