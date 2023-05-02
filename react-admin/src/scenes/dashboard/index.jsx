@@ -10,7 +10,6 @@ import { Grid, Container } from '@mui/material';
 import PropTypes from 'prop-types';
 import AppWebsiteVisits from "./components/AppWebsiteVisits";
 
-
 function Item(props) {
   const { sx, ...other } = props;
   return (
@@ -40,11 +39,15 @@ Item.propTypes = {
 
 
 const Dashboard = () => {
+  // const toBn = n => n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d])
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const leave_all_types = useFetch('http://localhost:5000/leave/all_types');
+  const leave_all_statuses = useFetch('http://localhost:5000/leave/all_statuses');
 
-  const Data = leave_all_types?.map((item) => { return { label: item.type_name, value: item.type_count } })
+  const Data = leave_all_statuses?.map((item) => { return { label: item.status_name, value: item.status_count } });
+  const chartLabels_Bar = leave_all_types?.map((item) => { return [item.type_name] });
+  const chartData_Bar = leave_all_types?.map((item) => item.type_count);
   return (
     <div>
       <Box mx="60px">
@@ -55,7 +58,7 @@ const Dashboard = () => {
       <Box mx="60px" sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
         <Item>
         <AppCurrentVisits
-            title="ছুটি"
+            title="ছুটির আবেদনের সারমর্ম"
             chartData={Data}
             chartColors={[
               theme.palette.primary.main,
@@ -67,28 +70,23 @@ const Dashboard = () => {
         </Item>
         <Item>
         <AppWebsiteVisits
-              title="Website Visits"
-              chartLabels={[
-                ['John Doe'],
-                  ['Joe Smith'],
-                  ['Jake Williams'],
-                  ['Amber'],
-                  ['Peter Brown'],
-                  ['Mary Evans'],
-                  ['David Wilson'],
-                  ['Lily Roberts'], 
-              ]}
-              chartData={[21, 22, 10, 28, 16, 21, 13, 30]}
+              title="বিভাগীয় ছুটির সারমর্ম"
+              chartLabels={chartLabels_Bar}
+              chartData_prop={chartData_Bar}
               chartColors={[
                 theme.palette.primary.main,
+                theme.palette.success.main,
                 theme.palette.warning.main,
                 theme.palette.error.main,
               ]}
             />
           </Item>
       </Box>
-      <Box mx="60px" sx={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)' }}>
+      <Box mx="60px" sx={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)' }} mt={10}>
         <Item>
+        <Header
+          subtitle="কর্মকর্তা/কর্মচারীদের ছুটি/দেরিতে প্রবেশের ক্যালেন্ডার"
+        />
           <EmployeeCalander />
         </Item>
       </Box>

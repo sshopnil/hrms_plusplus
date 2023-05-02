@@ -6,6 +6,7 @@ import AttendanceTable from './components/AttendanceTable';
 import useFetch from '../organogram/useFetch';
 import DgridTable from './components/DgridTable';
 import axios from 'axios';
+import DateSelector from './components/DateSelector';
 
 export default function Index() {
     const [employee_rows, SetRows] = useState([]);
@@ -29,13 +30,21 @@ export default function Index() {
       .then((response) => SetAtt(response.data))
       .catch((error) => console.error(error));
     }
+    const [query_date, setDate] = useState("");
+    const [showTable, setShowTable] = useState(false);
+
+    const handleDate = (val) => {
+        setDate(val);
+        (val != 'Invalid Date') ? setShowTable(true) : setShowTable(false);
+    }
     return (
         <div>
             <Box mx="60px">
                 <Header
                     title="উপস্থিতি সংরক্ষণ"
                 />
-                <AttendanceTable chunks={employee_rows} daily_attendance={daily_rows} handleAttendance={handleAttendance}/>
+                <DateSelector handleDate={handleDate} />
+                {showTable && <AttendanceTable chunks={employee_rows} daily_attendance={daily_rows} handleAttendance={handleAttendance} handleDate={handleDate} query_date = {query_date}/>}
             </Box>
         </div>
     )

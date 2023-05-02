@@ -25,21 +25,19 @@ export default function EmployeeCalander() {
       function handleSelect(data) {
         setSelectedOptions(data);
       }
-    // console.log(selectedOptions);
-   
 
   return (
     <div>
         <div className="dropdown-container" style={{width:"400px", paddingBottom:"50px"}}>
       <Select
         options={emList}
-        placeholder="Select an employee"
+        placeholder="খুঁজুন"
         value={selectedOptions}
         onChange={handleSelect}
         isSearchable={true}
       />
     </div>
-    <Calendar id={selectedOptions?.value}/>
+    {selectedOptions && <Calendar usr_id = {selectedOptions?.value}/>}
     </div>
   )
 }

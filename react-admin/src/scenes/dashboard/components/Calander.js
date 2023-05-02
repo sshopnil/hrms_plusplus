@@ -27,6 +27,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { tileGroupProps, tileProps } from 'react-calendar/dist/cjs/shared/propTypes';
 import CircleIcon from '@mui/icons-material/Circle';
 import {Box} from '@mui/material';
+
+
+
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -100,18 +104,21 @@ function getDatesInRange(startDate, endDate) {
   return dates
   }
 
-// const usr_id = sessionStorage.getItem('act_usr_id');
+// const usr_id = sessionStorage.getItem('sel');
 
 
+MyCalendar.propTypes = {
+    usr_id: PropTypes.number
+  };
 // console.log(usr_id);
-export default function MyCalendar(props) {
-    const usr_id = props?.id;
+export default function MyCalendar({usr_id, ...other}) {
+    // const usr_id = props?.id;
     const dayjs = require('dayjs');
     const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const [value, onChange] = useState(new Date());
     const chunks = useFetch("http://localhost:5000/daily_attendance");
     const emp_leave_history = useFetch('http://localhost:5000/employee/'+usr_id);
-    // console.log(usr_id);
+    // console.log(usr_id, leave_history);
     const approvedLeaves = emp_leave_history.leaves?.filter((item) => item.leave_approval_status == 1);
 
     const dates = approvedLeaves?.map((item)=> getDatesInRange(new Date(item.leave_start_date), new Date(item.leave_end_date)));

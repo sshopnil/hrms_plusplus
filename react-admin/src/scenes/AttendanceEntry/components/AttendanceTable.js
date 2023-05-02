@@ -48,21 +48,21 @@ export default function AttendanceTable(props) {
     const att_history = props.daily_attendance;
 
 
-    const [query_date, setDate] = useState("");
+    // const [query_date, setDate] = useState("");
     const [exit_value, setExitValue] = React.useState([]);
     const [entry_value, setEntryValue] = React.useState([]);
     const notify = () => { toast.success("সফলভাবে সিস্টেমে গৃহীত হয়েছে!", { position: toast.POSITION.BOTTOM_RIGHT }) };
 
-    const handleDate = (val) => {
-        setDate(val);
-    }
+    // const handleDate = (val) => {
+    //     setDate(val);
+    // }
 
     function handleClick(event, id) {
         event.preventDefault();
         if(entry_value[id] == "" && exit_value[id] == "")
         {
             const obj = {
-                "date": query_date,
+                "date": props?.query_date,
 	            "employee_id": id,
 	            "late_status": 2
 
@@ -80,7 +80,7 @@ export default function AttendanceTable(props) {
         else
         {
             const obj = {
-                "date": query_date,
+                "date": props?.query_date,
                 "office_entry_time": entry_value[id],
                 "office_exit_time": exit_value[id],
                 "employee_id": id
@@ -127,7 +127,6 @@ export default function AttendanceTable(props) {
     };
     return (
         <div>
-            <DateSelector handleDate={handleDate} />
             <TableContainer component={Paper} sx={{ minWidth: 550, m: 5, background: "#f5f5fa",
           boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
           borderRadius: "30px",
@@ -150,7 +149,7 @@ export default function AttendanceTable(props) {
                     </TableHead>
                     <TableBody>
                         {nRows?.map((row) => (
-                            att_history?.find(x => x?.employee.id == row.empl_id && x?.date == query_date) ?
+                            att_history?.find(x => x?.employee.id == row.empl_id && x?.date == props?.query_date) ?
                                 <TableRow
                                     key={row.empl_id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

@@ -17,13 +17,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import  axios  from "axios";
 // import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Topbar = (props) => {
-
-  const [user_name, setCurrentUserName] = useState();
+  const notify = () => { toast.success("পাসওয়ার্ড পরিবর্তন করা হয়েছে!", { position: toast.POSITION.BOTTOM_LEFT }) };
+  // const [user_name, setCurrentUserName] = useState();
   const [password, setCurrentPassword] = useState();
+  const [cpassword, setConfirmPassword] = useState();
 
   const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
@@ -54,26 +56,34 @@ const Topbar = (props) => {
 
   const handlePasswordChangeCloseDialog = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/employee/change_password",
-        {
-          user_name,
-          password,
-        }
-      );
-
-      console.log(response.data.change_password_status);
-    } catch (error) {
-      // Handle API call error
+    const user = sessionStorage.getItem('act_usr_name');
+    console.log(user, password);
+    if(password == cpassword)
+    {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/employee/change_password",
+          {
+            "user_name": user.toString(),
+            "password": password.toString(),
+          }
+        );
+  
+        // console.log(response.data.change_password_status);
+      } catch (error) {
+        // Handle API call error
+      }
+      notify();
+      setOpenDialog(false);
+      setConfirmPassword("");
+      setCurrentPassword("");
     }
-    setOpenDialog(false);
   };
 
   const handleDialogClose = () => {
     setOpenDialog(false);
   };
-
+  
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
@@ -84,21 +94,23 @@ const Topbar = (props) => {
             <TextField
               autoFocus
               margin="dense"
-              id="name"
-              label="নাম"
+              id="password"
+              label="নতুন পাসওয়ার্ড"
               fullWidth
               variant="standard"
-              onChange={(e) => setCurrentUserName(e.target.value)}
-              value={user_name}
+              type="password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={cpassword}
             />
 
             <TextField
               autoFocus
               margin="dense"
-              id="name"
-              label="পাসওয়ার্ড"
+              id="confirm_password"
+              label="পাসওয়ার্ড নিশ্চিত করুন"
               fullWidth
               variant="standard"
+              type="password"
               onChange={(e) => setCurrentPassword(e.target.value)}
               value={password}
             />
@@ -192,7 +204,9 @@ const Topbar = (props) => {
           লগ-আউট
         </MenuItem>
       </Menu>
+      <ToastContainer />
     </Box>
+    
   );
 };
 

@@ -91,7 +91,6 @@ const usr_id = sessionStorage.getItem('act_usr_id');
 console.log(usr_id);
 
 export default function ApprovalTable(props) {
-    const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
     const [open, setOpen] = React.useState(false);
     const useLeaveInf = useFetch('http://localhost:5000/daily_attendance');
 

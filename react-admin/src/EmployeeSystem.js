@@ -21,6 +21,9 @@ import axios from 'axios';
 import AttendanceStatus from './scenes/AttendanceStatus';
 import AttendanceLateApproval from './scenes/AttendanceLateApproval';
 import EmployeeOrganogram from './scenes/EmployeeOrganogram';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
 import LoginPage from './LoginPage';
 const style = {
   position: 'absolute',
@@ -41,48 +44,41 @@ export default function EmployeeSystem() {
   const chunks = useFetch("http://localhost:5000/office_post");
   
 
-  
-  // console.log(pos_id);
-  const [open, setOpen] = React.useState(false);
+  const pass_stat = sessionStorage.getItem('user_pass_stat');
+  // console.log(parseInt(pass_stat));
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-    console.log("pressed");
-  };
+  const [open, setOpen] = React.useState(true);
+  // if(parseInt(pass_stat) == 0)
+  // {
+  //   setOpen(true);
+  // }
+  const handleClose = () => setOpen(false);
 
   return (
     <div className="app">
         <Sidebar />
         <main className="content">
         <Topbar />
-          {(
-            <Dialog
+          {
+            (parseInt(pass_stat) == 0) &&
+            <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
           >
-            <DialogTitle id="alert-dialog-title">
-              {"Use Google's location service?"}
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Let Google help apps determine location. This means sending anonymous
-                location data to Google, even when no apps are running.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Disagree</Button>
-              <Button onClick={handleClose} autoFocus>
-                Agree
-              </Button>
-            </DialogActions>
-          </Dialog>
-          )}
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+              ডিফল্ট পাসওয়ার্ড সনাক্ত করা হয়েছে
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                
+                দয়া করে, পাসওয়ার্ড পরিবর্তন করুন
+              </Typography>
+            </Box>
+          </Modal>
+          }
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
