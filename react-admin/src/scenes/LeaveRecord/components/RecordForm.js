@@ -12,9 +12,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Header from '../../../components/Header';
 import useFetch from '../../organogram/useFetch';
-function createData(leave_type, leave_start, leave_end) {
-  return {leave_type, leave_start, leave_end};
-}
+import PropTypes from 'prop-types';
+
+
+
+
 
 
 
@@ -28,18 +30,48 @@ const sxButton =
     }
 }
 
-export default function RecordForm() {
+
+RecordForm.propTypes = {
+    nRows: PropTypes.array,
+  };
+
+export default function RecordForm({nRows}) {
     const dayjs = require('dayjs');
     const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
-    const usr_id = sessionStorage.getItem('act_usr_id');
-    const emp_leave_history = useFetch('http://localhost:5000/employee/'+usr_id);
-    // console.log(emp_leave_history.leaves);
-    let nRow = emp_leave_history.leaves?.filter((item)=> item.leave_approval_status == 1);
-    nRow = nRow?.map((item)=> createData(item.leave_type.name, item.leave_start_date,item.leave_end_date));
     
+    
+    const [svalue, setsValue] = React.useState("");
+    const [rows, setRows] = React.useState(nRows);
+    React.useEffect(() => {
+        setRows(nRows);
+    }, [nRows]);
+
+// console.log(nRows);
+    const sdateChange = (event)=>{
+        event.preventDefault();
+        setsValue(event.target.value);
+    }
+    const [evalue, seteValue] = React.useState("");
 
 
-    console.log(nRow);
+    const edateChange = (event)=>{
+        event.preventDefault();
+        seteValue(event.target.value);
+    }
+
+    // console.log(evalue);
+    // const dayjs = require('dayjs');
+
+
+
+
+const handleFilter = ()=>
+{
+    const row = nRows?.map((items)=> {if(dayjs(svalue).format("DD/MM/YYYY") >= dayjs(items?.leave_start).format("DD/MM/YYYY") && dayjs(items?.leave_end).format("DD/MM/YYYY") >= dayjs(evalue).format("DD/MM/YYYY")){return items}});
+
+    setRows(row);
+    // console.log(row);
+}
 
     return (
         <div>
@@ -50,6 +82,14 @@ export default function RecordForm() {
                         type="date"
                         id="leave_start"
                         name="leave_start"
+                        format="dd-mm-yyyy"
+                    placeholder="dd-mm-yyyy"
+                    value={svalue}
+                    onChange={sdateChange}
+                    sx={{
+                        marginBottom: "20px",
+                        display: "block"
+                    }}
                     />
                 </FormControl>
                 <FormControl sx={{ m: 1, mx: 10, minWidth: 210, borderBottom: "2px solid #99C4C8" }}>
@@ -58,10 +98,18 @@ export default function RecordForm() {
                         type="date"
                         id="leave_end"
                         name="leave_end"
+                        format="dd-mm-yyyy"
+                    placeholder="dd-mm-yyyy"
+                    value={evalue}
+                    onChange={edateChange}
+                    sx={{
+                        marginBottom: "20px",
+                        display: "block"
+                    }}
                     />
                 </FormControl>
                 <FormControl sx={{ mx: 10, my: 2.5, minWidth: 210, textAlign: "left" }}>
-                    <Button variant="raised" component="label" sx={sxButton}>
+                    <Button variant="raised" component="label" sx={sxButton} onClick={handleFilter}>
                         <FilterAltSharpIcon />
                         ফিল্টার
                     </Button>
@@ -90,16 +138,16 @@ export default function RecordForm() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {nRow?.map((row) => (
+                            {rows?.map((row) => (
                                 <TableRow
-                                    key={row.leave_type}
+                                    key={row?.leave_type}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {row.leave_type}
+                                        {row?.leave_type}
                                     </TableCell>
-                                    <TableCell align="left">{toBn(dayjs(row.leave_start).format("DD-MM-YYYY"))}</TableCell>
-                                    <TableCell align="left">{toBn(dayjs(row.leave_end).format("DD-MM-YYYY"))}</TableCell>
+                                    <TableCell align="left">{row && toBn(dayjs(row?.leave_start).format("DD-MM-YYYY"))}</TableCell>
+                                    <TableCell align="left">{row && toBn(dayjs(row?.leave_end).format("DD-MM-YYYY"))}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

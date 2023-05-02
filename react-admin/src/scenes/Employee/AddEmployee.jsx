@@ -250,12 +250,12 @@ const ModalForm = (props) => {
                   </div>
               <input type="file" accept="image/*" onChange={selectFile} id="selectedFile" ref={hiddenFileInput}/>
               <Button onClick={handleClick} className="custom-file-upload">
-        Upload a file
+        ছবি আপলোড করুন
       </Button>
               </InputLabel>
               <TextField
                 variant="standard"
-                label="Username"
+                label="ব্যবহারকারীর নাম"
                 name="user_name"
                 value={formData.user_name}
                 onChange={handleUserNameChange}
@@ -267,7 +267,7 @@ const ModalForm = (props) => {
 
               <TextField
                 variant="standard"
-                label="Name"
+                label="পুরো নাম"
                 name="name"
                 value={formData.name}
                 onChange={handleNameChange}
@@ -279,7 +279,7 @@ const ModalForm = (props) => {
 
               <TextField
                 variant="standard"
-                label="Phone"
+                label="ফোন"
                 name="phone"
                 value={formData.phone}
                 onChange={handleUserPhoneNoChange}
@@ -291,7 +291,7 @@ const ModalForm = (props) => {
 
               <TextField
                 variant="standard"
-                label="Current Address"
+                label="বর্তমান ঠিকানা"
                 name="address_curr"
                 value={formData.address_curr}
                 onChange={handleUserCurrentAddressChange}
@@ -303,7 +303,7 @@ const ModalForm = (props) => {
 
               <TextField
                 variant="standard"
-                label="Permanent Address"
+                label="স্থায়ী ঠিকানা"
                 name="address_perm"
                 value={formData.address_perm}
                 onChange={handlePermanentAddressChange}
@@ -315,7 +315,7 @@ const ModalForm = (props) => {
 
               <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-controlled-open-select-label">
-                  Religion
+                  ধর্ম
                 </InputLabel>
                 <Select
                   labelId="religion-label"
@@ -336,7 +336,7 @@ const ModalForm = (props) => {
 
               <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <InputLabel id="demo-controlled-open-select-label">
-                  Marital Status
+                    বৈবাহিক অবস্থা
                 </InputLabel>
                 <Select
                   labelId="religion-label"
@@ -356,7 +356,7 @@ const ModalForm = (props) => {
               </FormControl>
 
               <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <label htmlFor="myDate">Date of Birth</label>
+                <label htmlFor="myDate">জন্ম তারিখ</label>
                 <input
                   type="date"
                   id="dob"

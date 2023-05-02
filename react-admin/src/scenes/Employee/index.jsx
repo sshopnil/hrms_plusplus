@@ -57,7 +57,7 @@ const EmlpoyeeList = () => {
 
   //Table Column names
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
+    { field: "id", headerName: "ID", flex: 0.5},
     {field: "user_image", headerName:"",
     renderCell: (params) => <Avatar src={process.env.PUBLIC_URL+"/user_images/"+params.value}/>
   },
