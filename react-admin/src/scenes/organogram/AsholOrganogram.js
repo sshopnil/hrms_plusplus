@@ -137,6 +137,7 @@ const AsholOrganogram = (props) => {
 
   const onNodeClick = (event, node) => {
     window.localStorage.setItem('parent', JSON.stringify(node.id));
+    window.localStorage.setItem('parent_id', JSON.stringify(node.data.parent_id));
     window.localStorage.setItem('parent_pos', JSON.stringify(node.data.job));
     window.localStorage.setItem('parent_dept', JSON.stringify(node.data.dep_id));
     handleClickOpen();
@@ -162,7 +163,7 @@ const AsholOrganogram = (props) => {
   ///========================================handle add employees========================================
   const handleAddEmployee = (empObj) => {
     let selfId = JSON.parse(window.localStorage.getItem('parent'));
-    const temp_node = initNode?.map((item => { if (item.id == selfId) { item.data.name = empObj.name; } return item; }));
+    const temp_node = initNode?.map((item => { if (item.id == selfId) { item.data.name = empObj.name; item.data.emoji = empObj.user_image} return item; }));
 
     setInitNode(temp_node);
     notifyAdd();

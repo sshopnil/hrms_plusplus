@@ -13,14 +13,14 @@ const makeNodes = (node) => {
     return {
       id: node.id.toString(),
       type: 'custom',
-      data: { name: '', job: node.name, emoji: '', department: node.department.name, dep_id: node.department.id },
+      data: { name: '', job: node.name, emoji: '', department: node.department.name, dep_id: node.department.id, parent_id:node.parent_id},
       position: {},
     }
   }
   return {
     id: node.id.toString(),
     type: 'custom',
-    data: { name: node.employee.name, job: node.name, emoji: '', department: node.department.name, dep_id: node.department.id },
+    data: { name: node.employee.name, job: node.name, emoji: node.employee.user_image, department: node.department.name, dep_id: node.department.id, parent_id:node.parent_id},
     position: {},
   };
 }
@@ -30,14 +30,14 @@ const makeFnode=(node)=>
     return {
       id: node.id.toString(),
       type: 'custom',
-      data: { name: '', job: node.name, emoji: '', department: node.department.name, dep_id: node.department.id },
+      data: { name: '', job: node.name, emoji: '', department: node.department.name, dep_id: node.department.id, parent_id:node.parent_id},
       position: {x:0,y:0},
     }
   }
   return {
     id: node.id.toString(),
     type: 'custom',
-    data: { name: node.employee.name, job: node.name, emoji: '', department: node.department.name, dep_id: node.department.id },
+    data: { name: node.employee.name, job: node.name, emoji: node.employee.user_image, department: node.department.name, dep_id: node.department.id, parent_id:node.parent_id},
     position: {x:0,y:0},
   };
 }

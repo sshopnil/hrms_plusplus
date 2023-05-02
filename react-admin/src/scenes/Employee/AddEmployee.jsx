@@ -18,6 +18,7 @@ import Header from "../../components/Header";
 import { Box } from "@mui/material";
 import axios from "axios";
 import dayjs from "dayjs";
+// import "bootstrap/dist/css/bootstrap.min.css";
 // import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -31,6 +32,7 @@ const initialState = {
   name: "",
   religion_id: "",
   user_name: "",
+  user_image:""
 };
 
 const ModalForm = (props) => {
@@ -57,6 +59,21 @@ const ModalForm = (props) => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
 
+
+  const [usr_img, setFile] = useState({currentFile: undefined,
+    previewImage: undefined});
+
+    // console.log(usr_img.currentFile.name);
+    const selectFile=(event)=>{
+      setFile({
+        currentFile: event.target.files[0],
+        previewImage: URL.createObjectURL(event.target.files[0])
+      });
+      setFormData({
+        ...formData,
+        user_image: event.target.files[0].name,
+      });
+    };
   const handleUserNameChange = (e) => {
     setFormData({
       ...formData,
@@ -116,6 +133,9 @@ const ModalForm = (props) => {
   // dayjs(toBn(formData.dob)).format("MM/DD/YYYY")
   const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
 
+
+  // console.log(typeof(formData.user_image));
+
     const handleSubmit = (e) => {
       e.preventDefault();
       const obj = {
@@ -127,9 +147,13 @@ const ModalForm = (props) => {
         "name": formData.name,
         "religion_id": formData.religion_id,
         "user_name": formData.user_name,
+        "user_image":formData.user_image,
       }
       axios.post('http://localhost:5000/employee', obj)
-      .then(response => {console.log(response); props.onShowDataAfterAdd();})
+      .then(response => {console.log(response); props.onShowDataAfterAdd(); setFile({
+        currentFile: undefined,
+        previewImage: undefined
+      });})
       .catch(error => console.error(error));
       setFormData(initialState);
       
@@ -168,6 +192,10 @@ const ModalForm = (props) => {
     }
     return errors;
   };
+  const hiddenFileInput = React.useRef(null);
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
 
   return (
     <Box>
@@ -193,8 +221,8 @@ const ModalForm = (props) => {
           sx={{
             bgcolor: "white",
             width: "75%",
-            height: "50%",
-            margin: "150px auto",
+            height: "90%",
+            margin: "50px auto",
             boxShadow: 3,
             borderRadius: 2,
             display: "block",
@@ -215,6 +243,16 @@ const ModalForm = (props) => {
                 color: "black",
               }}
             >
+              
+              <InputLabel sx={{margin:"auto", alignItems:"center"}}>
+                  <div>
+                  <img src={usr_img.previewImage} alt="ছবি সংযুক্ত করা হয়নি" style={{height:"100px"}}/>
+                  </div>
+              <input type="file" accept="image/*" onChange={selectFile} id="selectedFile" ref={hiddenFileInput}/>
+              <Button onClick={handleClick} className="custom-file-upload">
+        Upload a file
+      </Button>
+              </InputLabel>
               <TextField
                 variant="standard"
                 label="Username"
@@ -333,6 +371,9 @@ const ModalForm = (props) => {
               <Box mt="20px">
                 <Button type="submit" color="secondary" variant="contained">
                   সংযোজন
+                </Button>
+                <Button variant="contained" sx={{background:"red", marginLeft:"10px"}} onClick={handleClose}>
+                  বাতিল
                 </Button>
               </Box>
             </Box>

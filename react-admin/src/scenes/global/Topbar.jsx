@@ -140,9 +140,7 @@ const Topbar = (props) => {
           aria-expanded={open ? "true" : undefined}
         >
           {/* sessionStorage.setItem('act_usr_name', username); */}
-          <Avatar sx={{ width: 32, height: 32, textTransform: "uppercase" }}>
-            {sessionStorage.getItem("act_usr_name")[0]}
-          </Avatar>
+          <Avatar src={process.env.PUBLIC_URL+"/user_images/"+sessionStorage.getItem("act_usr_img")}/>
         </IconButton>
       </Box>
       <Menu

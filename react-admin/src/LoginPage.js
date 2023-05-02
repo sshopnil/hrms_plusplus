@@ -17,6 +17,7 @@ import { useState } from 'react';
 import EmployeeSystem from './EmployeeSystem';
 import useFetch from './scenes/organogram/useFetch';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -33,6 +34,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -45,12 +47,13 @@ export default function LoginPage() {
   function handleSubmit(event) {
     event.preventDefault();
     // console.log(username, password);
+    navigate('/organogram', { replace: true });
+
     if(username == "admin" && password == "1234")
     {
-      
-
       sessionStorage.setItem('act_usr_name', username);
       sessionStorage.setItem('active_user', 'admin');
+      sessionStorage.setItem('act_usr_img', 'AD');
       window.location.reload(); 
 
     }
@@ -66,10 +69,14 @@ export default function LoginPage() {
         {
           
           const usr_id = usr_list?.filter((usr) => usr.user_name == username);
+          
           sessionStorage.setItem('act_usr_id', usr_id[0].id);
+          sessionStorage.setItem('act_usr_img', usr_id[0].user_image);
           sessionStorage.setItem('act_usr_name', username);
           sessionStorage.setItem('active_user', 'employee');
           sessionStorage.setItem('user_pass_stat', response.data.change_password_status.toString());
+          // navigate('/organogram', { replace: true });
+
           window.location.reload();
         }
         else

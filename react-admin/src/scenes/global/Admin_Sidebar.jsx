@@ -45,7 +45,7 @@ const Admin_Sidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          position: "absolute",
+          position: "fixed",
           left:"10px",
           top: "5px",
           background: "#f5f5fa",

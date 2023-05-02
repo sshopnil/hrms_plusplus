@@ -8,7 +8,7 @@ import ModalForm from "./AddEmployee";
 import EditForm from "./EditForm";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Avatar from "@mui/material/Avatar";
 
 
 const EmlpoyeeList = () => {
@@ -58,7 +58,10 @@ const EmlpoyeeList = () => {
   //Table Column names
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "user_name", headerName: "নাম" },
+    {field: "user_image", headerName:"",
+    renderCell: (params) => <Avatar src={process.env.PUBLIC_URL+"/user_images/"+params.value}/>
+  },
+    { field: "name", headerName: "নাম", width: 260},
     {
       field: "phone",
       headerName: "ফোন",
@@ -101,7 +104,7 @@ const EmlpoyeeList = () => {
         <DataGrid
           rows={employeeData}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
+          component={{ Toolbar: GridToolbar }}
           sx={{
             background: "#f5f5fa",
           boxShadow: "-10px -10px 30px 0 #fff,10px 10px 30px 0 #1d0dca17",
@@ -114,6 +117,7 @@ const EmlpoyeeList = () => {
           wordBreak: "normal",
           wordSpacing: "normal",
           }}
+          rowHeight={80}
         />
       </Box>
 

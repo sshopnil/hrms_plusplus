@@ -23,15 +23,16 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import { useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import { InputAdornment } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import { DataGrid, GridToolbar} from '@mui/x-data-grid';
 
 
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 50 },
+  {field: "user_image", headerName:"",
+    renderCell: (params) => <Avatar src={process.env.PUBLIC_URL+"/user_images/"+params.value}/>
+  },
   { field: 'name', headerName: 'নাম', width: 260 },
   {
     field: 'phone_no',
@@ -105,7 +106,7 @@ function PaperComponent(props: PaperProps) {
 export default function AssignEmployeeBtn(props) {
   const unPosEmployees = useFetch("http://localhost:5000/employee");
 
-  const nRow = unPosEmployees.map((item)=> Object.keys(item._office_post).length == 0? { id: item.id, name: item.name, phone_no:item.phone} : {});
+  const nRow = unPosEmployees.map((item)=> Object.keys(item._office_post).length == 0? { id: item.id, name: item.name, phone_no:item.phone, user_image: item.user_image} : {});
   // console.log(nRow);
 
 
@@ -125,6 +126,7 @@ export default function AssignEmployeeBtn(props) {
   let parentId = JSON.parse(window.localStorage.getItem('parent'));
   let parentPos = JSON.parse(window.localStorage.getItem('parent_pos'));
   let parentDep = JSON.parse(window.localStorage.getItem('parent_dept'));
+  let parent_id = JSON.parse(window.localStorage.getItem('parent_id'));
 
   const parentDepName = departments.find((item)=> item.id == parentDep);
   // console.log(parentDepName);
@@ -143,19 +145,20 @@ export default function AssignEmployeeBtn(props) {
   {
     const empl_id = sessionStorage.getItem('sel_empl');
     sessionStorage.removeItem('sel_empl');
-    const name = nRow.map((item)=>item.id == empl_id ? item.name: "");
+    const name = nRow.find((item)=>item.id == empl_id);
     // console.log(name[empl_id-1]);
-    console.log(name[empl_id-1], empl_id, parentDep, parentId);
+    // console.log(name[empl_id-1], empl_id, parentDep, parentId);
+
     const obj = {
-      "name": name[empl_id-1],
+      "name": name.name,
       "employee_id": parseInt(empl_id),
-      "parent_id": parseInt(parentId),
+      "parent_id": parseInt(parent_id),
       "department_id": parseInt(parentDep)
     }
-    axios.put('http://localhost:5000/office_post/'+empl_id, obj)
+    axios.put('http://localhost:5000/office_post/'+parentId, obj)
       .then(function (response) {
         console.log(response);
-        props.handleAddEmployee(obj);
+        props.handleAddEmployee(name);
         props.handleDialog();
       })
       .catch(function (error) {

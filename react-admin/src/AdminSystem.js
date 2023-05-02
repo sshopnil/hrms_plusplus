@@ -9,6 +9,7 @@ import Admin_Sidebar from './scenes/global/Admin_Sidebar';
 import AttendanceEntry from './scenes/AttendanceEntry';
 import AttendanceTime from './scenes/AttendanceTime';
 import { useNavigate } from 'react-router-dom';
+// import UserImage from './scenes/user_images';
 
 const style = {
   position: 'absolute',
@@ -36,7 +37,6 @@ export default function EmployeeSystem() {
             <Route path="/organogram" element={<Organogram />} />
             <Route path="/Employee" element={<EmlpoyeeList />} />
             <Route path="/AttendanceEntry" element={<AttendanceEntry />} />
-            
           </Routes>
         </main>
       </div>

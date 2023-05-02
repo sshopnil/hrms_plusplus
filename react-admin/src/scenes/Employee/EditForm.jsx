@@ -28,6 +28,7 @@ const initialState = {
   name: "",
   religion_id: "",
   user_name: "",
+  user_image:"",
 };
 
 
@@ -39,7 +40,7 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
   
   //const id = row.id;
   // console.log(row);
-  const  {address_perm,dob,address_curr,marital_status,phone,name,religion,user_name,id} = row;
+  const  {address_perm,dob,address_curr,marital_status,phone,name,religion,user_name,id, user_image} = row;
 
   
 
@@ -63,11 +64,26 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
   const dayjs = require('dayjs');
   const toBn = n => n?.replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
   
-  const  newRow = {address_perm,dob,address_curr,marital_status,phone,name,religion,user_name};
+  const  newRow = {address_perm,dob,address_curr,marital_status,phone,name,religion,user_name, user_image};
   // console.log(newRow);
   const [formData, setFormData] = useState(newRow);
   const [errors, setErrors] = useState({});
 
+
+  const [usr_img, setFile] = useState({currentFile: "",
+    previewImage: undefined});
+
+    // console.log(usr_img.currentFile.name);
+    const selectFile=(event)=>{
+      setFile({
+        currentFile: event.target.files[0].name,
+        previewImage: URL.createObjectURL(event.target.files[0])
+      });
+      setFormData({
+        ...formData,
+        user_image: event.target.files[0].name,
+      });
+    };
   const handleUserNameChange = (e) => {
     setFormData({
       ...formData,
@@ -133,6 +149,11 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
     const handleSubmit = (e) => {
       // console.log(row);
       // console.log(formData);
+      let u_img = usr_img.currentFile;
+      if(usr_img.currentFile == "")
+      {
+        u_img = formData.user_image;
+      }
       const obj = {
           "religion_id": formData.religion.id,
           "address_perm": formData.address_perm,
@@ -142,6 +163,7 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
           "name": formData.name,
           "user_name": formData.user_name,
           "phone": formData.phone,
+          "user_image":u_img,
       }
       onClose();
       e.preventDefault();
@@ -190,6 +212,11 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
     return errors;
   };
 
+  const hiddenFileInput = React.useRef(null);
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
+
   return (
     <Box>
         <Box
@@ -209,7 +236,7 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
           <Header sx={{ color: "success" }} title="কর্মকর্তা/কর্মচারীর তথ্য পরিবর্তন " />
 
           <form onSubmit={handleSubmit}>
-            <Box
+          <Box
               display="grid"
               gap="30px"
               gridTemplateColumns="repeat(4, minmax(0, 1fr))"
@@ -218,6 +245,16 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
                 color: "black",
               }}
             >
+              
+              <InputLabel sx={{margin:"auto", alignItems:"center"}}>
+                  <div>
+                  <img src={process.env.PUBLIC_URL+"/user_images/"+formData.user_image} alt="ছবি সংযুক্ত করা হয়নি" style={{height:"100px"}}/>
+                  </div>
+              <input type="file" accept="image/*" onChange={selectFile} id="selectedFile" ref={hiddenFileInput}/>
+              <Button onClick={handleClick} className="custom-file-upload">
+        Upload a file
+      </Button>
+              </InputLabel>
               <TextField
                 variant="standard"
                 label="Username"
@@ -336,6 +373,9 @@ const EditForm = ({ row, handleShowAfterEdit, onClose}) => {
               <Box mt="20px">
                 <Button type="submit" color="secondary" variant="contained">
                 তথ্য হালনাগাদ 
+                </Button>
+                <Button variant="contained" sx={{background:"red", marginLeft:"10px"}} onClick={onClose}>
+                  বাতিল
                 </Button>
               </Box>
             </Box>

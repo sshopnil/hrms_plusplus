@@ -19,7 +19,7 @@ const LoggedInSidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          position: "absolute",
+          position: "fixed",
           left: "15px",
           top: "5px",
           width:"280px",

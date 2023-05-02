@@ -48,7 +48,7 @@ const Sidebar = () => {
     <Box
       sx={{
         "& .pro-sidebar-inner": {
-          position: "absolute",
+          position: "fixed",
           left:"10px",
           top: "5px",
           width:"280px",

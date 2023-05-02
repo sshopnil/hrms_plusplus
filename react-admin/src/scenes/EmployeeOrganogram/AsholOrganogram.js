@@ -31,6 +31,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Avatar from "@mui/material/Avatar";
 
 const ReactFlowStyled = styled(ReactFlow)`
   background-color: ${(props) => props.theme.bg};
@@ -241,6 +242,7 @@ const AsholOrganogram = (props) => {
           কর্মকর্তা/কর্মচারীর তথ্য
         </BootstrapDialogTitle>
         <DialogContent dividers>
+        {/* <Avatar src={process.env.PUBLIC_URL+"/user_images/"+rows?.user_image}/> */}
           <TableContainer component={Paper} sx={{ m: 5 }}>
             <Table aria-label="simple table">
               <TableBody>
