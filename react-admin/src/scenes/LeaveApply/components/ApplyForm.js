@@ -159,7 +159,7 @@ export default function ApplyForm() {
                         <Button size="small" sx={rejBtn} onClick={formik.handleReset}>বাতিল</Button>
                     </Box>
                 </form>
-                <ToastContainer/>
+                <ToastContainer autoClose={2000}/>
             </Box>
         </div>
     )

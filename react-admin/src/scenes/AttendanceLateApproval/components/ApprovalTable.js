@@ -256,7 +256,7 @@ export default function ApprovalTable(props) {
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
-            <ToastContainer/>
+            <ToastContainer autoClose={2000}/>
         </div>
     )
 }

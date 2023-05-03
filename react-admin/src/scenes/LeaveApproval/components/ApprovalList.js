@@ -152,7 +152,7 @@ export default function ApprovalList(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <ToastContainer/>
+            <ToastContainer autoClose={2000}/>
         </Box>
     )
 }

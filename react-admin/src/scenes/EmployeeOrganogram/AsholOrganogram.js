@@ -305,9 +305,9 @@ const AsholOrganogram = (props) => {
       </BootstrapDialog>
 
       <ThemeProvider theme={theme}>
-        <button onClick={toggleMode} style={{ position: 'absolute', zIndex: 100, left: 1000, top: 10 }}>
+        {/* <button onClick={toggleMode} style={{ position: 'absolute', zIndex: 100, left: 1000, top: 10 }}>
           switch mode
-        </button>
+        </button> */}
         <ReactFlowStyled
           nodes={nodes}
           edges={edges}
@@ -337,8 +337,8 @@ const AsholOrganogram = (props) => {
         </ReactFlowStyled>
       </ThemeProvider>
       <div className="controls">
-        <button onClick={() => onLayout('TB')}>vertical layout</button>
-        <button onClick={() => onLayout('LR')}>horizontal layout</button>
+        <button onClick={() => onLayout('TB')} style={{background: "#008db9", padding:"5px", color:"white", borderRadius:"5px"}}>ভারটিকাল</button>
+        <button onClick={() => onLayout('LR')} style={{background: "#ff6666", padding:"5px", color:"white", borderRadius:"5px"}}>হরাইজন্টাল</button>
       </div>
     </div>
   );

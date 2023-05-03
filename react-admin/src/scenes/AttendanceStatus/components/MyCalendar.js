@@ -226,7 +226,7 @@ export default function MyCalendar() {
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
-            <ToastContainer/>
+            <ToastContainer autoClose={2000}/>
         </div>
     );
 }

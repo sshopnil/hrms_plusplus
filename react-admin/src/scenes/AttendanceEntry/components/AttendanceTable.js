@@ -260,7 +260,7 @@ export default function AttendanceTable(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <ToastContainer />
+            <ToastContainer autoClose={2000}/>
         </div>
     )
 }
